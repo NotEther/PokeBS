@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\BattleController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -13,6 +14,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/bs', [BattleController::class, 'index'])->name('bs');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

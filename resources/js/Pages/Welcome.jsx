@@ -15,22 +15,21 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="PokeBS" />
-            <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-            <img
-            id="background"
-            className="absolute top-0 left-0 w-screen object-cover"
-            src="/icons/wallpaper.jpg"
-            />
+            <div className="relative min-h-screen w-screen">
+    <img
+        id="background"
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        src="/icons/wallpaper.jpg"
+    />
 
                 <div className="relative flex min-h-screen flex-col selection:bg-[#FF2D20] selection:text-white">
                     <div className="relative">
                         <header className="py-5 ">
+                            <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
+                                <img src="/icons/logo.png" className="h-40" />
+                            </div>
 
-                        <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
-    <img src="/icons/logo.png" className="h-40" />
-</div>
-
-                                <nav className="flex flex-1 justify-end mr-4" style={{ gap: "10px" }}>
+                            <nav className="fixed top-0 left-0 w-full flex justify-end p-4" style={{ gap: "10px" }}>
                                 {auth.user ? (
                                     <Link
                                         href={route('dashboard')}
@@ -41,7 +40,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 ) : (
                                     <>
                                         <Link
-                                        href={route('login')}
+                                            href={route('login')}
                                             className="bg-[#FF2D20] text-white rounded-md px-4 py-2 ring-1 ring-transparent transition hover:bg-[#FF2D20]/80 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-[#FF2D20] dark:hover:bg-[#FF2D20]/80 dark:focus-visible:ring-white"
                                         >
                                             Log in
@@ -57,116 +56,77 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             </nav>
                         </header>
                                 
-                        <main className="mt-6">
-                        <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh', // Centers vertically by making container full height of the viewport
-        padding: '20px',
-      }}
-    >
-      <div
+<main className="mt-6">
+    <div
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '80%', // Adjusts width to keep content centered
-          maxWidth: '1200px', // Limits max width for better readability on large screens
-          gap: '20px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh', // Centers vertically by making container full height of the viewport
+            padding: '20px',
         }}
-      >
-        {/* Left Section */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '45%',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)', // Half-transparent white background
-            padding: '20px',
-            borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '20px', color: '#007bff' }}>Battle-Simulator</h1>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '20px' }}>
-            <img
-              src="/icons/fight.jpg" // Replace with your image URL
-              alt="description"
-              style={{ width: '300px', height: '200px', objectFit: 'cover' }}
-            />
-          </div>
-          <p style={{ fontSize: '18px', color: 'black', marginBottom: '20px', textAlign: 'center' }}>
-            This is some descriptive text on the left.
-          </p>
-          <a
-            href="https://example.com"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '10px 20px',
-              fontSize: '16px',
-              color: 'white',
-              backgroundColor: '#007bff',
-              textDecoration: 'none',
-              borderRadius: '5px',
-            }}
-          >
-            Click Me
-          </a>
+    >
+        <div className="flex flex-col md:flex-row justify-center items-center min-h-screen p-5">
+            <div className="flex flex-col items-center min-w-[300px] min-h-[428px] w-full md:w-1/2 lg:w-2/5 bg-white/70 p-5 rounded-lg shadow-md m-3">
+                <h1 className="text-4xl font-bold mb-5 text-blue-500">Battle-Simulator</h1>
+                    <img
+                        src="/icons/fight.jpg"
+                        alt="Battle Simulator"
+                        className="w-full h-48 object-cover mb-5"
+                    />
+                    <p className="text-lg text-black text-center mb-5">
+                        This is some descriptive text on the left.
+                    </p>
+                    {auth.user ? (
+                        <a
+                            href={route('bs')}
+                            className="inline-flex items-center min-w-[100px] justify-center px-6 py-2 text-white bg-blue-500 rounded-md"
+                        >
+                            Battle
+                        </a>
+                    ) : (
+                        <button
+                            disabled
+                            className="inline-flex items-center min-w-[100px] justify-center px-6 py-2 text-white bg-blue-500/50 rounded-md cursor-not-allowed"
+                            title="You must be logged in to access this feature"
+                        >
+                            Battle
+                        </button>
+                    )}
+            </div>
+            <div className="flex flex-col items-center min-w-[300px] min-h-[400px] w-full md:w-1/2 lg:w-2/5 bg-white/70 p-5 rounded-lg shadow-md m-3">
+                <h1 className="text-4xl font-bold mb-5 text-red-600">Team Builder</h1>
+                <img
+                    src="/icons/team.jpg"
+                    alt="Team Builder"
+                    className="w-full h-48 object-cover mb-5"
+                />
+                <p className="text-lg text-black text-center mb-5">
+                    Create your own team and become the champion!
+                </p>
+                {auth.user ? (
+                    <a
+                        href="https://example.com"
+                        className="inline-flex items-center justify-center w-32 h-10 text-white bg-red-600 rounded-md"
+                    >
+                        Build
+                    </a>
+                ) : (
+                    <button
+                        disabled
+                        className="inline-flex items-center justify-center w-32 h-10 text-white bg-red-600/50 rounded-md cursor-not-allowed"
+                        title="You must be logged in to access this feature"
+                    >
+                        Build
+                    </button>
+                    )}
+            </div>
         </div>
-
-        {/* Right Section */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '45%',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)', // Half-transparent white background
-            padding: '20px',
-            borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '20px', color: '#FF2D20' }}>Team Builder</h1>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '20px' }}>
-            <img
-              src="/icons/team.jpg" // Replace with your image URL
-              alt="description"
-              style={{ width: '300px', height: '200px', objectFit: 'cover' }}
-            />
-          </div>
-          <p style={{ fontSize: '18px', color: 'black', marginBottom: '20px', textAlign: 'center' }}>
-            Create your own team and become the champion!
-          </p>
-          <a
-            href="https://example.com"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '10px 20px',
-              fontSize: '16px',
-              color: 'white',
-              backgroundColor: '#FF2D20',
-              textDecoration: 'none',
-              borderRadius: '5px',
-            }}
-          >
-            Click Me
-          </a>
-        </div>
-      </div>
-    </div>
-                        </main>
-
-                        <footer className="py-16 text-center text-sm text-white/70">
+    </div>    
+</main>
+                    <footer className="py-16 text-center text-sm text-white/70">
                         PokeBS is a fan-made, non-profit project.<br></br> All Pokémon rights belong to Nintendo, Game Freak, and The Pokémon Company. No affiliation or infringement intended.
-                        </footer>
+                    </footer>
                     </div>
                 </div>
             </div>
