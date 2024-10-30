@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const TopBanner = () => {
+const TopBanner = ({ friendListVisible, isLargeScreen }) => {
     return (
-        <div style={styles.banner}>
-            <p style={styles.text}>Battle-Simulator</p>
+        <div style={{
+            ...styles.banner,
+            ...(isLargeScreen && friendListVisible ? styles.bannerShifted : {})
+        }}>
+            <p style={{
+                ...styles.text,
+                ...(isLargeScreen && friendListVisible ? styles.textShifted : {})
+            }}>Battle-Simulator</p>
         </div>
     );
 };
@@ -19,16 +25,19 @@ const styles = {
         zIndex: 1000,
         padding: "10px 0",
         textAlign: "center",
-        transition: "transform 0.3s ease, width 0.3s ease",
+        transition: "transform 0.3s ease, width 0.3s ease, margin-left 0.3s ease",
     },
     bannerShifted: {
+        marginLeft: "25%",
         width: "75%", // Scales to 3/4 width when friend list is open on large screens
-        transform: "translateX(25%)",
     },
     text: {
         color: "white",
         textShadow: "1px 1px 2px rgba(0, 0, 0, 0.7)",
         fontSize: "18px",
+        transition: "margin-left 0.3s ease",
+    },
+    textShifted: {
     },
     leftColumn: {
         backgroundColor: "#383838",
@@ -61,8 +70,11 @@ const styles = {
     buttonContainer: {
         display: "flex",
         justifyContent: "center",
-        margin: "-20px 0",
+        margin: "-13px 0",
         transition: "transform 0.3s ease",
+        left: 0,
+        right: 0,
+        zIndex: 1001,
     },
     button: {
         flex: 1,
@@ -84,7 +96,7 @@ const styles = {
         gap: "10px",
         justifyContent: "center",
         padding: "10px",
-        margin: "20px",
+        margin: "30px",
         transition: "transform 0.3s ease, width 0.3s ease",
     },
     flexboxItem: {
@@ -163,7 +175,7 @@ const styles = {
         width: "25%", // Only 1/4 of the screen width on large screens
     },
     contentShifted: {
-        transform: "translateX(25%)", // Shift content 25% to the right
+        marginLeft: "25%",
         width: "75%", // Scale content to fill 3/4 of the screen
     },
 };
@@ -262,9 +274,7 @@ const BattleMenu = () => {
 
     return (
         <div>
-            <div style={{ ...styles.banner, ...(isLargeScreen && friendListVisible ? styles.bannerShifted : {}) }}>
-                <TopBanner />
-            </div>
+            <TopBanner friendListVisible={friendListVisible} isLargeScreen={isLargeScreen} />
             {isLargeScreen && !friendListVisible ? <div style={styles.leftColumn}></div> : null}
             {isLargeScreen && !friendListVisible ? <div style={styles.rightColumn}></div> : null}
             <div style={{ ...styles.content, ...(isLargeScreen && friendListVisible ? styles.contentShifted : {}) }}>
