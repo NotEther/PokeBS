@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/bs', [BattleController::class, 'index'])->name('bs');
-
+Route::get('/battle/generate', [BattleController::class, 'generateBattle'])->name('battle.generate');
+Route::get('/battle/{battleId}', [BattleController::class, 'showBattle'])->name('battle.show');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -29,7 +29,7 @@ const styles = {
     },
     bannerShifted: {
         marginLeft: "25%",
-        width: "75%", // Scales to 3/4 width when friend list is open on large screens
+        width: "75%",
     },
     text: {
         color: "white",
@@ -151,7 +151,7 @@ const styles = {
         transition: "border 0.2s ease",
     },
     iconActive: {
-        border: "2px solid yellow",
+        border: "3px solid yellow",
     },
     iconImage: {
         width: "30px",
@@ -235,9 +235,8 @@ const BattleMenu = () => {
         setSelectedIndex(index);
     };
 
-    const handleConfirmClick = () => {
-        alert("Confirmed!");
-        setSelectedIndex(null);
+    const handleConfirmClick = (battleType) => {
+        window.location.href = `/battle/generate?battleType=${encodeURIComponent(battleType)}`;
     };
 
     const renderList = (list) => {
@@ -260,7 +259,7 @@ const BattleMenu = () => {
                         style={styles.confirmButton}
                         onClick={(e) => {
                             e.stopPropagation();
-                            handleConfirmClick();
+                            handleConfirmClick(item.text); // Pass item.text as the battleType
                         }}
                     >
                         Play
