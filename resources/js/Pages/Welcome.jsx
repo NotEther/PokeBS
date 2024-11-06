@@ -13,6 +13,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     };
 
     return (
+        
         <>
             <Head title="PokeBS" />
             <div className="relative min-h-screen w-screen">

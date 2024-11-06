@@ -21,12 +21,13 @@ class BattleController extends Controller
     }
 
     public function showBattle($battleId)
-    {
-    // Retrieve the battle type from the session
-        $battleType = session('battleType', 'Random Battle'); // Default if not set
-
-        return view('battle.show', compact('battleId', 'battleType'));
-    }
+{
+    $battleType = session('battleType', 'Random Battle');
+    return Inertia::render('Battle/BattleGame', [
+        'battleId' => $battleId,
+        'battleType' => $battleType,
+    ]);
+}
 
     public function index()
     {
