@@ -15,6 +15,15 @@ const TopBanner = ({ friendListVisible, isLargeScreen }) => {
 };
 
 const styles = {
+    background: {
+        backgroundImage: "url('icons/bswallpaper.jpg')",
+        backgroundSize: "cover",
+        backgroundRepeat: "repeat",
+        backgroundPosition: "center",
+        minHeight: "100vh", // Changed to minHeight to ensure it covers the full page
+        width: "100%", // Ensure it spans the entire width of the page
+        margin: "0", // Remove default margin that could limit the background
+    },
     banner: {
         backgroundColor: "#ED0505",
         color: "white",
@@ -272,7 +281,7 @@ const BattleMenu = () => {
     };
 
     return (
-        <div>
+        <div style={styles.background}> {/* Apply the background style here */}
             <TopBanner friendListVisible={friendListVisible} isLargeScreen={isLargeScreen} />
             {isLargeScreen && !friendListVisible ? <div style={styles.leftColumn}></div> : null}
             {isLargeScreen && !friendListVisible ? <div style={styles.rightColumn}></div> : null}
