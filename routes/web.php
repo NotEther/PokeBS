@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BattleController;
+use App\Http\Controllers\TeamBuilderController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -21,6 +23,10 @@ Route::get('/battle/{battleId}', [BattleController::class, 'showBattle'])->name(
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/teambuilder', [TeamBuilderController::class, 'index'])
+    ->middleware('auth')
+    ->name('teambuilder.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
